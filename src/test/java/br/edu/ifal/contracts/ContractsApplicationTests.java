@@ -1,10 +1,10 @@
-package br.edu.ifal.contratos;
+package br.edu.ifal.contracts;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ContratosApplicationTests {
+class ContractsApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,13 +1,13 @@
-package br.edu.ifal.contratos;
+package br.edu.ifal.contracts;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ContratosApplication {
+public class ContractsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ContratosApplication.class, args);
+		SpringApplication.run(ContractsApplication.class, args);
 	}
 
 }
