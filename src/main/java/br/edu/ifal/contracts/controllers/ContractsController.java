@@ -1,6 +1,6 @@
 package br.edu.ifal.contracts.controllers;
 
-import br.edu.ifal.contracts.views.AddContractRequest;
+import br.edu.ifal.contracts.views.ContractRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ public class ContractsController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addContract(@RequestBody AddContractRequest addContractRequest) throws URISyntaxException {
+    public ResponseEntity<String> addContract(@RequestBody ContractRequest contractRequest) throws URISyntaxException {
         return ResponseEntity.created(new URI("http://localhost:8080/v1/contracts")).body("");
     }
 }

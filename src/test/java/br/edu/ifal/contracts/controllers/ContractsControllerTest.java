@@ -34,6 +34,8 @@ class ContractsControllerTest {
     @DisplayName("Should return created when a contract is added")
     void shouldReturnCreatedWhenAContractIsAdded() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate).contentType(MediaType.APPLICATION_JSON).content("{}"))
-                .andExpect(MockMvcResultMatchers.status().isCreated());
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.header().exists("location"))
+                .andExpect(MockMvcResultMatchers.content().string(""));
     }
 }
