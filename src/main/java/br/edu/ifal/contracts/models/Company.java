@@ -17,11 +17,6 @@ public class Company {
         this.cnpj = cnpj;
     }
 
-    public Company(String name, String cnpj) {
-        this.name = name;
-        this.cnpj = cnpj;
-    }
-
     protected Company() { //JPA
     }
 

@@ -1,24 +1,28 @@
 package br.edu.ifal.contracts.controllers;
 
-import br.edu.ifal.contracts.views.ContractRequest;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import br.edu.ifal.contracts.dtos.ContractDto;
+import br.edu.ifal.contracts.repositories.CompanyRepository;
+import br.edu.ifal.contracts.repositories.ContractsRepository;
+import br.edu.ifal.contracts.views.ContractView;
+import org.springframework.stereotype.Controller;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
-@RestController
-@RequestMapping("/v1/contracts")
+@Controller
 public class ContractsController {
-    @GetMapping
-    public List<Object> getContracts(){
+    private final ContractsRepository contractsRepository;
+    private final CompanyRepository companyRepository;
 
-        return List.of();
+    public ContractsController(ContractsRepository contractsRepository, CompanyRepository companyRepository) {
+        this.contractsRepository = contractsRepository;
+        this.companyRepository = companyRepository;
     }
 
-    @PostMapping
-    public ResponseEntity<String> addContract(@RequestBody ContractRequest contractRequest) throws URISyntaxException {
-        return ResponseEntity.created(new URI("http://localhost:8080/v1/contracts")).body("");
+    public List<ContractView> getContracts() {
+        return this.contractsRepository.findAll().stream().map(ContractView::new).toList();
+    }
+
+    public void addContract(ContractDto contractDto) {
+        this.contractsRepository.save(contractDto.mapToContract());
     }
 }

@@ -1,5 +1,7 @@
 package br.edu.ifal.contracts.views;
 
+import br.edu.ifal.contracts.dtos.CompanyDto;
+import br.edu.ifal.contracts.dtos.ContractDto;
 import br.edu.ifal.contracts.models.Contract;
 import br.edu.ifal.contracts.models.Representative;
 import org.junit.jupiter.api.DisplayName;
@@ -9,15 +11,15 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ContractRequestTest {
+class ContractDtoTest {
 
     @Test
     @DisplayName("Should map to contract model")
     void shouldMapToContractModel() {
 
-        var contractRequest = new ContractRequest(
+        var contractRequest = new ContractDto(
                 UUID.randomUUID().toString(),
-                new CompanyRequest(
+                new CompanyDto(
                         UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString()
                 ),
                 new Representative(UUID.randomUUID().toString(), UUID.randomUUID().toString())
