@@ -2,8 +2,8 @@ package br.edu.ifal.contracts.views;
 
 import br.edu.ifal.contracts.dtos.CompanyDto;
 import br.edu.ifal.contracts.dtos.ContractDto;
+import br.edu.ifal.contracts.dtos.RepresentativeDto;
 import br.edu.ifal.contracts.models.Contract;
-import br.edu.ifal.contracts.models.Representative;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,20 +17,21 @@ class ContractDtoTest {
     @DisplayName("Should map to contract model")
     void shouldMapToContractModel() {
 
-        var contractRequest = new ContractDto(
+        CompanyDto companyDto = new CompanyDto(
+                UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString()
+        );
+        var contractDto = new ContractDto(
                 UUID.randomUUID().toString(),
-                new CompanyDto(
-                        UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString()
-                ),
-                new Representative(UUID.randomUUID().toString(), UUID.randomUUID().toString())
+                companyDto,
+                new RepresentativeDto(UUID.randomUUID().toString(), UUID.randomUUID().toString())
         );
 
-        Contract contract = contractRequest.mapToContract();
-        assertEquals(contractRequest.title(), contract.getTitle());
-        assertEquals(contractRequest.contractedCompany().name(),contract.getContractedCompany().getName());
-        assertEquals(contractRequest.contractedCompany().address(), contract.getContractedCompany().getAddress());
-        assertEquals(contractRequest.contractedCompany().cnpj(), contract.getContractedCompany().getCnpj());
-        assertEquals(contractRequest.representative(),contract.getCompanyRepresentative());
+        Contract contract = contractDto.mapToContract(companyDto.mapToCompany());
+        assertEquals(contractDto.title(), contract.getTitle());
+        assertEquals(contractDto.contractedCompany().name(),contract.getContractedCompany().getName());
+        assertEquals(contractDto.contractedCompany().address(), contract.getContractedCompany().getAddress());
+        assertEquals(contractDto.contractedCompany().cnpj(), contract.getContractedCompany().getCnpj());
+        assertEquals(contractDto.representative().mapToRepresentative(),contract.getCompanyRepresentative());
     }
 
 }

@@ -1,14 +1,12 @@
 package br.edu.ifal.contracts.models;
 
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class Contract {
     @Id
+    @GeneratedValue
     private Long id;
     private String title;
     @ManyToOne
