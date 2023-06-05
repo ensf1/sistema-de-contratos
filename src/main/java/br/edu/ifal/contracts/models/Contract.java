@@ -100,5 +100,11 @@ public abstract class Contract implements Payable {
     }
 
     @Override
-    public abstract LocalDate nextPayment();
+    public abstract LocalDate nextPayment() throws ContractOfServices.ContractAlreadyEndedException;
+
+    public static class ContractAlreadyEndedException extends Exception {
+        public ContractAlreadyEndedException(String message) {
+            super(message);
+        }
+    }
 }

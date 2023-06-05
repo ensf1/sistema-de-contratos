@@ -23,8 +23,11 @@ public class ContractOfServices extends Contract{
     }
 
     @Override
-    public LocalDate nextPayment() {
+    public LocalDate nextPayment() throws ContractAlreadyEndedException {
         LocalDate now = LocalDate.now();
+        if (getEnd().isBefore(now)) {
+            throw new ContractAlreadyEndedException("Contract already ended - contract end date is before today");
+        }
         return now.withDayOfMonth(5).plusMonths(1);
     }
 }

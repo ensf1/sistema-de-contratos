@@ -24,13 +24,11 @@ public class ContractsController {
         this.companiesRepository = companiesRepository;
     }
     @PostMapping
-    public ResponseEntity<Object> addContract(@RequestBody ContractDto contractDto) {
-        this.contractsRepository.save(
+    public ResponseEntity<ContractView> addContract(@RequestBody ContractDto contractDto) {
+        return ResponseEntity.status(201).body(new ContractView(this.contractsRepository.save(
                 contractDto.mapToContract(
                         this.companiesRepository.save(contractDto.contractedCompany().mapToCompany())
-                )
-        );
-        return ResponseEntity.status(201).build();
+                ))));
     }
     @GetMapping
     public List<ContractView> getContracts() {

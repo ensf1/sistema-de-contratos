@@ -53,6 +53,13 @@ public class TestUtils {
         return new ContractOfGoodsAndMaterials(randomString(), randomString(), company, randomRepresentative(), randomDate(), randomDate());
     }
 
+    public static Contract randomContract(Company company, ContractType contractType) {
+        if (contractType.equals(ContractType.SERVICES)) {
+            return new ContractOfServices(randomString(), randomString(), company, randomRepresentative(), randomDate(), randomDate());
+        }
+        return new ContractOfGoodsAndMaterials(randomString(), randomString(), company, randomRepresentative(), randomDate(), randomDate());
+    }
+
     public static Representative randomRepresentative() {
         return new Representative(randomString(), randomString());
     }

@@ -8,7 +8,7 @@ import br.edu.ifal.contracts.models.Contract;
 import br.edu.ifal.contracts.repositories.CompaniesRepository;
 import br.edu.ifal.contracts.repositories.ContractsRepository;
 import br.edu.ifal.contracts.views.ContractView;
-import org.junit.jupiter.api.Assertions;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static br.edu.ifal.contracts.TestUtils.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ContractsControllerTest {
@@ -85,14 +85,18 @@ class ContractsControllerTest {
 
     @Test
     @DisplayName("Should delete contract from database")
+    @Transactional
     void shouldDeleteContractFromDatabase(){
         // arrange
-
+        Company company = companiesRepository.save(randomCompany());
+        Contract contract1 = contractsRepository.save(randomContract(company));
+        Contract contract2 = contractsRepository.save(randomContract(company));
         // act
+        contractsController.deleteContract(contract1.getNumber());
 
         // assert
-
-        Assertions.fail("Not implemented");
+        assertNull(contractsRepository.findByNumber(contract1.getNumber()));
+        assertNotNull(contractsRepository.findByNumber(contract2.getNumber()));
     }
 
 }

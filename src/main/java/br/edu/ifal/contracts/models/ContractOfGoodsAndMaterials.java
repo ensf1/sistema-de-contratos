@@ -25,6 +25,10 @@ public class ContractOfGoodsAndMaterials extends Contract{
     @Override
     public LocalDate nextPayment() {
         LocalDate now = LocalDate.now();
-        return now.withMonth(1).plusYears(1).withDayOfMonth(5);
+        LocalDate nextPayment = now.withMonth(1).plusYears(1).withDayOfMonth(5);
+        if(nextPayment.isAfter(getEnd())) {
+            return getEnd();
+        }
+        return nextPayment;
     }
 }

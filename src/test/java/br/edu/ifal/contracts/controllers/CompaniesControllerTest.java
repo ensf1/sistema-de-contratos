@@ -3,6 +3,7 @@ package br.edu.ifal.contracts.controllers;
 import br.edu.ifal.contracts.dtos.CompanyDto;
 import br.edu.ifal.contracts.models.Company;
 import br.edu.ifal.contracts.repositories.CompaniesRepository;
+import br.edu.ifal.contracts.repositories.ContractsRepository;
 import br.edu.ifal.contracts.views.CompanyView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,17 +20,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CompaniesControllerTest {
 
     private final CompaniesRepository companiesRepository;
+    private final ContractsRepository contractsRepository;
     private CompaniesController companiesController;
 
     @Autowired
-    CompaniesControllerTest(CompaniesRepository companiesRepository) {
+    CompaniesControllerTest(CompaniesRepository companiesRepository, ContractsRepository contractsRepository) {
         this.companiesRepository = companiesRepository;
+        this.contractsRepository = contractsRepository;
     }
 
     @BeforeEach
     void setUp(){
+        contractsRepository.deleteAll();
         companiesRepository.deleteAll();
-        companiesController = new CompaniesController(companiesRepository);
+        companiesController = new CompaniesController(companiesRepository, contractsRepository);
     }
 
     @Test
@@ -73,7 +77,6 @@ class CompaniesControllerTest {
 
         // act and assert
 //        assertEquals(companiesController.addCompany(companyWithEmptyName) , ResponseEntity.status(201).build());
-
 
     }
 
