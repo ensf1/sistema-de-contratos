@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -33,10 +34,15 @@ public class CompaniesController {
     }
 
     @PostMapping("{cnpj}/contracts")
-    public ResponseEntity<ContractView> addContractToCompany(@Valid @RequestBody ContractDto contractDto, @PathVariable String cnpj) {
-        Company company = this.companiesRepository.findByCnpj(cnpj);
-        Contract contract = this.contractsRepository.save(contractDto.mapToContract(company));
-        return ResponseEntity.status(201).body(new ContractView(contract));
+    public ResponseEntity<?> addContractToCompany(@Valid @RequestBody ContractDto contractDto, @PathVariable String cnpj) {
+        Optional<Company> optionalCompany = this.companiesRepository.findByCnpj(cnpj);
+        if (optionalCompany.isPresent()) {
+            Company company = optionalCompany.get();
+            Contract contract = this.contractsRepository.save(contractDto.mapToContract(company));
+            return ResponseEntity.status(201).body(new ContractView(contract));
+        } else {
+            return ResponseEntity.status(404).body("Company not found");
+        }
     }
 
     @GetMapping

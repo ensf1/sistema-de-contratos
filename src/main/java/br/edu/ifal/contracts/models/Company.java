@@ -1,9 +1,6 @@
 package br.edu.ifal.contracts.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Company {
@@ -12,6 +9,7 @@ public class Company {
     private Long id;
     private String name;
     private String address;
+    @Column(unique = true, nullable = false)
     private String cnpj;
 
     public Company(String name, String address, String cnpj) {
