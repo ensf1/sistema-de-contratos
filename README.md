@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Este projeto é composto por um backend em Java com Spring localizado na pasta `back-contracts` e um frontend em ReactJS localizado na pasta `front-contracts`. 
+Este projeto é composto por um backend em Java com Spring localizado na pasta `back-contracts` e um frontend em ReactJS localizado na pasta `front-contracts`. Ele consome a API [iPify](https://api.ipify.org/?format=json).
 
 ## Estrutura do Projeto
 
